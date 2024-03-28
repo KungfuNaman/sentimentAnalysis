@@ -1,11 +1,11 @@
-/* Add to styles.css */
+Add to styles.css
 
 body, input, button, h1 {
     font-family: 'Poppins', sans-serif;
 }
 
 .upload-form {
-    background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+    background: rgba(255, 255, 255, 0.2); 
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
@@ -26,7 +26,6 @@ h1 {
     height: 50px;
     line-height: 50px;
     text-align: center;
-    /* background: #5375ca; */
     color: #FFFFFF;
     border: none;
     border-radius: 25px;

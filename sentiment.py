@@ -19,18 +19,7 @@ def analyze_sentiment(conversation, retries=3):
         else:
             raise Exception("Rate limit exceeded, no retries left.")
 
-if __name__ == "__main__":
-    sample_conversation = """
-    [Speaker_1]: Hello Dave. How are you?
-    [Speaker_2]: Hi Joseph. I’m good. Yesterday went for a run. What about you?
-    [Speaker_1]: I’m fine. Today I will read a book. I like reading.
-    """
-    try:
-        insights = analyze_sentiment(sample_conversation)
-        print("Sentiment Analysis Insights:")
-        print(insights)
-    except Exception as e:
-        print(f"Failed to get insights: {str(e)}")
+
 
 
 

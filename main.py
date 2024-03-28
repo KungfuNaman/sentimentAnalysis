@@ -4,7 +4,6 @@ import speech_recognition as sr
 import os
 from pydub import AudioSegment
 
-app = Flask(__name__)
 
 # @app.route("/")
 # def home():
@@ -39,6 +38,8 @@ def upload_file():
     return render_template('index.html')
 
 
+
+
 @app.route('/transcribe/<filename>')
 def transcribe(filename):
     original_filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -62,10 +63,8 @@ def transcribe(filename):
 
 
     return render_template('transcribe.html', transcription=text, sentiment_analysis=sentiment_analysis)
-    
 
-# if __name__ == "__main__":
-#     app.run()
+
+
 if __name__ == "__main__":
-    app.run(debug=True, port=3000)
-
+    app.run(debug=True, port=3004)
