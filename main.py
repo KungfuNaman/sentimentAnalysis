@@ -4,6 +4,10 @@ import speech_recognition as sr
 import os
 from pydub import AudioSegment
 import boto3
+import re
+import json
+
+
 
 
 
@@ -77,6 +81,17 @@ def transcribe(filename):
     )
     bucket_name = 'myaudiosentimentbucket'
     object_key = f'transcriptions/{filename}.json'
+
+    # sentiment_analysis=sentiment_analysis.replace("json","")
+    # try:
+    #     decoded_sentiment_analysis = json.loads(sentiment_analysis)
+    #     print("Decoded JSON:", decoded_sentiment_analysis)
+    # except json.decoder.JSONDecodeError as e:
+    #     decoded_sentiment_analysis = []  # Default to an empty list if decoding fails
+    #     print("Decoding JSON failed:", e)
+    # print("this is initial",decoded_sentiment_analysis)
+    sentiment_analysis = sentiment_analysis.strip('```json\n').rstrip('```')
+
     s3_response = s3.put_object(
         Bucket=bucket_name,
         Key=object_key,
@@ -85,6 +100,13 @@ def transcribe(filename):
             'sentiment_analysis': sentiment_analysis
         }).encode()
     )
+    # Convert the string to a Python object (list of dictionaries in this case)
+    print("this is analysis",sentiment_analysis)
+
+    print(type(sentiment_analysis))
+ 
+    sentiment_analysis=json.loads(sentiment_analysis)
+    print(type(sentiment_analysis))
 
     return render_template('transcribe.html', transcription=text, sentiment_analysis=sentiment_analysis)
 

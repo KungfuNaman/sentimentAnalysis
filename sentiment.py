@@ -7,7 +7,7 @@ def analyze_sentiment(conversation, retries=3):
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": f"Given the following conversation, provide a sentiment analysis, including emotional states and psychological insights for each speaker seperately in bullet points and give me there happy rating from 1 to 5:\n\n{conversation}"}
+                {"role": "user", "content": f"""Given the following conversation, provide a sentiment analysis, including emotional states and psychological insights for each speaker separately in bullet points. Assign a happiness rating from 1 to 5. Present the response in a Array of JSON format only without any extra text with each entry containing 'speaker', 'emotional_states', 'psychological_insights', and 'happy_rating' as keys. All values should be strings."""}
             ]
         )
         return response['choices'][0]['message']['content'].strip()
