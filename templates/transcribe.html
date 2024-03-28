@@ -66,12 +66,39 @@
                         <p><strong>Emotional states:</strong> {{ speaker.emotional_states }}</p>
                         <p><strong>Psychological insights:</strong> {{ speaker.psychological_insights }}</p>
                     </div>
-                    <div class="card-footer">Happy rating: <span class="badge badge-secondary">{{ speaker.happy_rating }}</span></div>
+                    <div class="card-footer">
+                        Happy rating:
+                        {% set emoji = '' %}
+                        {% if speaker.happy_rating == '1' %}
+                            {% set emoji = '😢' %}
+                        {% elif speaker.happy_rating == '2' %}
+                            {% set emoji = '😟' %}
+                        {% elif speaker.happy_rating == '3' %}
+                            {% set emoji = '😐' %}
+                        {% elif speaker.happy_rating == '4' %}
+                            {% set emoji = '😊' %}
+                        {% elif speaker.happy_rating == '5' %}
+                            {% set emoji = '😁' %}
+                        {% endif %}
+                        <span class="badge badge-secondary">{{ emoji }}</span>
+                    </div>                
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
+    <footer class="container mt-5">
+        <div class="text-center">
+            <h4>Happy Rating Scale</h4>
+            <p>
+                😢 - 1 &nbsp; | &nbsp;
+                😟 - 2 &nbsp; | &nbsp;
+                😐 - 3 &nbsp; | &nbsp;
+                😊 - 4 &nbsp; | &nbsp;
+                😁 - 5
+            </p>
+        </div>
+    </footer>
     <script>
         // Assuming `sentiment_analysis` is the variable you pass to your HTML from your Flask app
         var sentiment_analysis = {{ sentiment_analysis | tojson | safe }};
