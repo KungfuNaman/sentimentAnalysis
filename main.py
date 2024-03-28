@@ -81,7 +81,7 @@ def transcribe(filename):
         Bucket=bucket_name,
         Key=object_key,
         Body=str({
-            'transcription': text,
+            # 'transcription': text,
             'sentiment_analysis': sentiment_analysis
         }).encode()
     )
