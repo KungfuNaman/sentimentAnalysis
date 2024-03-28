@@ -3,6 +3,8 @@ from sentiment import analyze_sentiment
 import speech_recognition as sr
 import os
 from pydub import AudioSegment
+import boto3
+
 
 
 # @app.route("/")
@@ -61,6 +63,28 @@ def transcribe(filename):
             text = f"An error occurred: {str(e)}"
             sentiment_analysis = "Sentiment analysis could not be performed."
 
+     # Save to S3
+    # Your AWS credentials and default region
+    aws_access_key_id = 'AKIAZI2LEQURTKBD7FNT'
+    aws_secret_access_key = '0Y8Wc9gDY3WT28WMyhBi2QFlvfJOr5XqVYTsTjZd'
+    aws_default_region = 'eu-west-2'
+
+    s3 = boto3.client(
+        's3',
+        aws_access_key_id=aws_access_key_id,
+        aws_secret_access_key=aws_secret_access_key,
+        region_name=aws_default_region
+    )
+    bucket_name = 'myaudiosentimentbucket'
+    object_key = f'transcriptions/{filename}.json'
+    s3_response = s3.put_object(
+        Bucket=bucket_name,
+        Key=object_key,
+        Body=str({
+            'transcription': text,
+            'sentiment_analysis': sentiment_analysis
+        }).encode()
+    )
 
     return render_template('transcribe.html', transcription=text, sentiment_analysis=sentiment_analysis)
 
