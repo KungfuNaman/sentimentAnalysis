@@ -68,7 +68,9 @@ def transcribe(filename):
             sentiment_analysis = "Sentiment analysis could not be performed."
 
     
-
+    aws_access_key_id = os.getenv('aws_access_key_id')
+    aws_secret_access_key = os.getenv('aws_secret_access_key')
+    aws_default_region = os.getenv('aws_default_region')
     s3 = boto3.client(
         's3',
         aws_access_key_id=aws_access_key_id,
