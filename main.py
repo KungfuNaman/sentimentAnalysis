@@ -67,11 +67,7 @@ def transcribe(filename):
             text = f"An error occurred: {str(e)}"
             sentiment_analysis = "Sentiment analysis could not be performed."
 
-     # Save to S3
-    # Your AWS credentials and default region
-    aws_access_key_id = 'AKIAZI2LEQURTKBD7FNT'
-    aws_secret_access_key = '0Y8Wc9gDY3WT28WMyhBi2QFlvfJOr5XqVYTsTjZd'
-    aws_default_region = 'eu-west-2'
+    
 
     s3 = boto3.client(
         's3',
