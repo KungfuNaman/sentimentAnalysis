@@ -35,7 +35,7 @@
 <body>
     <div class="upload-form">
         <h1>Audio Analysis</h1>
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data" onsubmit="showLoading()">
            <label class="file-input">
                 <input type="file" id="file" name="file" style="display: none;" onchange="showFileName()">
                 Click here to select file
@@ -45,6 +45,8 @@
 
             <input type="submit" value="Upload" class="submit-btn">
         </form>
+        <div id="loadingMessage" style="color: black; display: none;">Uploading...</div>
+
     </div>
 </body> 
 <script>
@@ -58,5 +60,8 @@
             fileNameDisplay.innerText = 'No file chosen'; // Reset the text if no file is selected
         }
     }
+    function showLoading() {
+    document.getElementById('loadingMessage').style.display = 'block';
+}
 </script>
 </html>
