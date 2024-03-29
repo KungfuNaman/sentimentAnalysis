@@ -80,7 +80,7 @@ def transcribe(filename):
         region_name=aws_default_region
     )
     bucket_name = 'myaudiosentimentbucket'
-    object_key = f'transcriptions/{filename}.json'
+    object_key = f'sentimentanalysis/{filename}.json'
 
     # sentiment_analysis=sentiment_analysis.replace("json","")
     # try:
