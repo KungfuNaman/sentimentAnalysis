@@ -36,12 +36,27 @@
     <div class="upload-form">
         <h1>Audio Analysis</h1>
         <form method="post" enctype="multipart/form-data">
-            <label class="file-input">
-                <input type="file" name="file" style="display: none;">
+           <label class="file-input">
+                <input type="file" id="file" name="file" style="display: none;" onchange="showFileName()">
                 Click here to select file
+                
             </label>
+            <span id="file-name" style="color:black">No file chosen</span>
+
             <input type="submit" value="Upload" class="submit-btn">
         </form>
     </div>
-</body>
+</body> 
+<script>
+    function showFileName() {
+        var fileInput = document.getElementById('file');
+        var fileNameDisplay = document.getElementById('file-name');
+        if (fileInput.files.length > 0) {
+            var fileName = fileInput.files[0].name;
+            fileNameDisplay.innerText = fileName; // Update the text to show the file name
+        } else {
+            fileNameDisplay.innerText = 'No file chosen'; // Reset the text if no file is selected
+        }
+    }
+</script>
 </html>
