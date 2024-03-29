@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Audio Analysis</title>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        body {
+            height: 100vh;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 10s ease infinite;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .card {
+            margin-bottom: 20px;
+            color:blue;
+        }
+
+        .card-header {
+            font-weight: bold;
+        }
+
+        .happy-rating {
+            font-weight: bold;
+            margin-top: 15px;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- <p>{{ sentiment_analysis }}</p> -->
+
+    <div class="container mt-5">
+        <!-- Cards Container -->
+        <div class="row">
+            {% for speaker in sentiment_analysis %}
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">{{ speaker.speaker }}</div>
+                    <div class="card-body">
+                        <p><strong>Emotional states:</strong> {{ speaker.emotional_states }}</p>
+                        <p><strong>Psychological insights:</strong> {{ speaker.psychological_insights }}</p>
+                    </div>
+                    <div class="card-footer">
+                        Happy rating:
+                        {% set emoji = '' %}
+                        {% if speaker.happy_rating == '1' %}
+                            {% set emoji = '😢' %}
+                        {% elif speaker.happy_rating == '2' %}
+                            {% set emoji = '😟' %}
+                        {% elif speaker.happy_rating == '3' %}
+                            {% set emoji = '😐' %}
+                        {% elif speaker.happy_rating == '4' %}
+                            {% set emoji = '😊' %}
+                        {% elif speaker.happy_rating == '5' %}
+                            {% set emoji = '😁' %}
+                        {% endif %}
+                        <span class="badge badge-secondary">{{ emoji }}</span>
+                    </div>                
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <footer class="container mt-5">
+        <div class="text-center">
+            <h4>Happy Rating Scale</h4>
+            <p>
+                😢 - 1 &nbsp; | &nbsp;
+                😟 - 2 &nbsp; | &nbsp;
+                😐 - 3 &nbsp; | &nbsp;
+                😊 - 4 &nbsp; | &nbsp;
+                😁 - 5
+            </p>
+        </div>
+    </footer>
+    <!-- <script>
+        // Assuming `sentiment_analysis` is the variable you pass to your HTML from your Flask app
+        var sentiment_analysis = {{ sentiment_analysis | tojson | safe }};
+        console.log('Sentiment Analysis Data:', sentiment_analysis);
+    </script> -->
+</body>
+
+</html>
