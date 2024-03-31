@@ -1,9 +1,7 @@
-# audio-sentiment-analysis
-<<<<<<< HEAD
-A web app leveraging Django, Deepgram API, and OpenAI for sentiment analysis of audio conversations. It transcribes dialogues, extracts emotional and psychological insights, and presents them through a user-friendly interface, offering a unique perspective on interpersonal communications.
-=======
 Audio Sentiment Analysis Project
 A web app leveraging Flask, Whisper, and OpenAI for sentiment analysis of audio conversations. It transcribes dialogues, extracts emotional and psychological insights, and presents them through a user-friendly interface, offering a unique perspective on interpersonal communications.
+=======
+
 # Features
 Audio file upload and storage
 Audio to text transcription using OpenAI's Whisper model
