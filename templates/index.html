@@ -34,18 +34,18 @@
 </head>
 <body>
     <div class="upload-form">
-        <h1>Audio Analysis</h1>
+        <h1 style="color: white;">Audio Analysis</h1>
         <form method="post" enctype="multipart/form-data" onsubmit="showLoading()">
            <label class="file-input">
-                <input type="file" id="file" name="file" style="display: none;" onchange="showFileName()">
+                <input type="file" id="file" name="file" style="display: none; font-size: 14px;" onchange="showFileName()">
                 Click here to select file
                 
             </label>
-            <span id="file-name" style="color:black">No file chosen</span>
+            <span id="file-name" style="color:grey; font-size: 14px;">No file chosen</span>
 
             <input type="submit" value="Upload" class="submit-btn">
         </form>
-        <div id="loadingMessage" style="color: black; display: none;">Uploading...</div>
+        <div id="loadingMessage" style="color: grey; display: none; padding-top: 10px;font-size: 14px;">Uploading...</div>
 
     </div>
 </body> 
@@ -55,9 +55,9 @@
         var fileNameDisplay = document.getElementById('file-name');
         if (fileInput.files.length > 0) {
             var fileName = fileInput.files[0].name;
-            fileNameDisplay.innerText = fileName; // Update the text to show the file name
+            fileNameDisplay.innerText = fileName; 
         } else {
-            fileNameDisplay.innerText = 'No file chosen'; // Reset the text if no file is selected
+            fileNameDisplay.innerText = 'No file chosen'; 
         }
     }
     function showLoading() {
