@@ -46,9 +46,9 @@ Step 3: Install Dependencies
 Command- pip install -r requirements.txt
 Step 4: Configure Environment Variables
 export OPENAI_API_KEY=your_openai_api_key_here
-export AWS_ACCESS_KEY_ID=your_aws_access_key_id_here
-export AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key_here
-export AWS_DEFAULT_REGION=your_aws_region_here
+export aws_access_key_id=your_aws_access_key_id_here
+export aws_secret_access_key=your_aws_secret_access_key_here
+export aws_default_region=your_aws_region_here
 Step 5: Run the Flask Application
 Command- python main.py
 Step 6: Access the Application
@@ -60,6 +60,7 @@ This command starts the server on http://127.0.0.1:3000, where you can access th
     aws_access_key_id = 'AKIAZI2LEQURTKBD7FNT'
     aws_secret_access_key = '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'
     aws_default_region = 'eu-west-2'
+    OPENAI_API_KEY='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'
     
 # Challenges Faced
 Developing this Flask-based audio sentiment analysis application presented several significant challenges, including:
