@@ -56,19 +56,19 @@ This command starts the server on http://127.0.0.1:3000, where you can access th
 
 # Access the web application at "http://localhost:3000".
 
+# Your AWS credentials and default region
+    aws_access_key_id = 'AKIAZI2LEQURTKBD7FNT'
+    aws_secret_access_key = '0Y8Wc9gDY3WT28WMyhBi2QFlvfJOr5XqVYTsTjZd'
+    aws_default_region = 'eu-west-2'
+    
 # Challenges Faced
-
 Developing this Flask-based audio sentiment analysis application presented several significant challenges, including:
-
 # Dynamic Responses from OpenAI's GPT API:
   - The variability in the structure and format of responses from OpenAI's GPT API.
   - With the variability of the AI's responses,devised a solution to instruct the model to return the output in a predefined format.
-
 # Secure Management of Sensitive Keys:
   - Initially faced a risk of hardcoding sensitive information, such as the OpenAI API key and AWS Access Keys, directly into the source code, which could lead to potential security vulnerabilities.
   - Implemented a secure strategy using environment variables for storing these keys, preventing them from being exposed in the project's version-controlled source code.
   - This approach highlighted the critical importance of security best practices in protecting sensitive information from unauthorized access.
 # SSL Certificate Error with Whisper Model:
 - Encountered SSL certificate verification errors when attempting to use OpenAI's Whisper model for audio transcription.
-
->>>>>>> sentimentBranch
