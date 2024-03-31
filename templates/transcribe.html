@@ -34,25 +34,65 @@
             color: white;
         }
 
+<<<<<<< HEAD
         .card {
             margin-bottom: 20px;
             color:blue;
         }
 
+=======
+>>>>>>> sentimentBranch
         .card-header {
             font-weight: bold;
         }
 
+<<<<<<< HEAD
         .happy-rating {
             font-weight: bold;
             margin-top: 15px;
         }
+=======
+         .card { 
+        background:#1c162e;
+        color:#fff;
+        border:none;
+        border-radius:5px;
+        height:250px;
+        text-align:center; 
+    
+        }
+
+        .heading{
+            margin-top:60px;
+        }
+
+        .card h3{
+        font-weight:300 !important;
+        font-size:21px;
+        }
+
+        .card p{
+        font-weight:100 !important;
+        font-size:13px;
+        }
+
+        .ratings img{
+            cursor:pointer;
+            transition:all 0.5s;
+        }
+
+        .ratings img:hover{
+        transform: scale(1.3);
+        }
+        
+>>>>>>> sentimentBranch
     </style>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
+<<<<<<< HEAD
     <!-- <p>{{ sentiment_analysis }}</p> -->
 
     <div class="container mt-5">
@@ -82,11 +122,51 @@
                         {% endif %}
                         <span class="badge badge-secondary">{{ emoji }}</span>
                     </div>                
+=======
+    
+    <div class="container mt-5">
+        <div class="row">
+            {% for speaker in sentiment_analysis %}
+            <div class="col-md-12">
+                <div class="card" style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-bottom: 1rem;">
+                    <div class="card-header" style="background-color: #1c162e; color: white; padding: 10px 15px; border-bottom: solid 1px white;">
+                        {{ speaker.speaker }}
+                    </div>
+        <div class="card-body" style="padding: 15px; background-color:#1c162e ; color:white;box-shadow: 0 4px 8px white;">
+                        <p style="margin-bottom: 0.5rem;"><strong>Emotional states:</strong> {{ speaker.emotional_states }}</p>
+                        <p style="margin-bottom: 0.5rem;"><strong>Psychological insights:</strong> {{ speaker.psychological_insights }}</p>
+                    </div>
+                    <div class="card-footer" style="border-top:solid 1px white; background-color: #1c162e; padding: 10px 15px;">
+                        Happy rating:
+                        {% set emoji_img = '' %}
+                        {% set emoji_alt = '' %}
+                        {% if speaker.happy_rating == '1' %}
+                            {% set emoji_img = 'https://cdn.jsdelivr.net/emojione/assets/3.0/png/64/1f62d.png' %}
+                            {% set emoji_alt = 'Very Sad' %}
+                        {% elif speaker.happy_rating == '2' %}
+                            {% set emoji_img = 'https://cdn.jsdelivr.net/emojione/assets/3.0/png/64/1f61e.png' %}
+                            {% set emoji_alt = 'Sad' %}
+                        {% elif speaker.happy_rating == '3' %}
+                            {% set emoji_img = 'https://cdn.jsdelivr.net/emojione/assets/3.0/png/64/1f610.png' %}
+                            {% set emoji_alt = 'Neutral' %}
+                        {% elif speaker.happy_rating == '4' %}
+                            {% set emoji_img = 'https://cdn.jsdelivr.net/emojione/assets/3.0/png/64/1f60a.png' %}
+                            {% set emoji_alt = 'Happy' %}
+                        {% elif speaker.happy_rating == '5' %}
+                            {% set emoji_img = 'https://cdn.jsdelivr.net/emojione/assets/3.0/png/64/1f601.png' %}
+                            {% set emoji_alt = 'Very Happy' %}
+                        {% endif %}
+                        <img src="{{ emoji_img }}" alt="{{ emoji_alt }}" style="width: 24px; height: 24px; vertical-align: middle;">
+                        <span class="badge badge-secondary" style="background-color: #6c757d; color: white;">{{ emoji_alt }}</span>
+                    </div>
+                    
+>>>>>>> sentimentBranch
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
+<<<<<<< HEAD
     <footer class="container mt-5">
         <div class="text-center">
             <h4>Happy Rating Scale</h4>
@@ -107,3 +187,44 @@
 </body>
 
 </html>
+=======
+    
+    <footer class="container mt-5">
+        <div class="card" style="font-family: Arial, sans-serif;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);border-radius:8px; width:400px;">
+            <div class="heading" style="text-align: center; margin-bottom: 10px;">
+                <h3>Sentiment Spectrum</h3>
+                <p>Explore the spectrum of sentiments and find where you stand!</p>
+            </div>
+            <div class="ratings" style="display: flex; justify-content: space-around; align-items: center;">
+                <div>
+                    <img src="https://cdn.jsdelivr.net/emojione/assets/3.0/png/64/1f62d.png" alt="Very Sad">
+                    <p>Very Sad</p>
+                </div>
+                <div>
+                    <img src="https://cdn.jsdelivr.net/emojione/assets/3.0/png/64/1f61e.png" alt="Sad">
+                    <p>Sad</p>
+                </div>
+                <div>
+                    <img src="https://cdn.jsdelivr.net/emojione/assets/3.0/png/64/1f610.png" alt="Neutral">
+                    <p>Neutral</p>
+                </div>
+                <div>
+                    <img src="https://cdn.jsdelivr.net/emojione/assets/3.0/png/64/1f60a.png" alt="Happy">
+                    <p>Happy</p>
+                </div>
+                <div>
+                    <img src="https://cdn.jsdelivr.net/emojione/assets/3.0/png/64/1f601.png" alt="Very Happy">
+                    <p>Very Happy</p>
+                </div>
+            </div>
+            
+        </div>
+        
+        <button onclick="window.location.href='/'" class="btn btn-primary mt-3" style="background-color: #1c162e;; color: white; border: none; padding: 10px 20px; border-radius: 5px; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2); cursor: pointer; transition: all 0.3s ease-in-out;">New Upload</button>
+
+
+    </footer>
+</body>
+
+</html>  
+>>>>>>> sentimentBranch

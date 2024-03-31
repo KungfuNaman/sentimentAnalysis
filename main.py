@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for
 from sentiment import analyze_sentiment
+<<<<<<< HEAD
 import speech_recognition as sr
 import os
 from pydub import AudioSegment
@@ -14,6 +15,18 @@ import json
 # @app.route("/")
 # def home():
 #     return render_template('index.html')
+=======
+import os
+from pydub import AudioSegment
+import boto3
+import whisper
+import json
+import ssl
+import certifi
+
+ssl_context = ssl.create_default_context(cafile=certifi.where())
+ssl._create_default_https_context = ssl._create_unverified_context
+>>>>>>> sentimentBranch
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads/'
@@ -43,13 +56,17 @@ def upload_file():
             return redirect(url_for('transcribe', filename=filename))
     return render_template('index.html')
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> sentimentBranch
 @app.route('/transcribe/<filename>')
 def transcribe(filename):
     original_filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     filepath = convert_to_wav(original_filepath)
+<<<<<<< HEAD
     recognizer = sr.Recognizer()
     with sr.AudioFile(filepath) as source:
         audio_data = recognizer.record(source)
@@ -69,6 +86,16 @@ def transcribe(filename):
 
     
 
+=======
+    model = whisper.load_model("base")  
+    result = model.transcribe(filepath)
+    text = result["text"]
+    sentiment_analysis = analyze_sentiment(text)
+
+    aws_access_key_id = os.getenv('aws_access_key_id')
+    aws_secret_access_key = os.getenv('aws_secret_access_key')
+    aws_default_region = os.getenv('aws_default_region')
+>>>>>>> sentimentBranch
     s3 = boto3.client(
         's3',
         aws_access_key_id=aws_access_key_id,
@@ -78,6 +105,7 @@ def transcribe(filename):
     bucket_name = 'myaudiosentimentbucket'
     object_key = f'sentimentanalysis/{filename}.json'
 
+<<<<<<< HEAD
     # sentiment_analysis=sentiment_analysis.replace("json","")
     # try:
     #     decoded_sentiment_analysis = json.loads(sentiment_analysis)
@@ -86,6 +114,8 @@ def transcribe(filename):
     #     decoded_sentiment_analysis = []  # Default to an empty list if decoding fails
     #     print("Decoding JSON failed:", e)
     # print("this is initial",decoded_sentiment_analysis)
+=======
+>>>>>>> sentimentBranch
     sentiment_analysis = sentiment_analysis.strip('```json\n').rstrip('```')
 
     s3_response = s3.put_object(
@@ -96,6 +126,7 @@ def transcribe(filename):
             'sentiment_analysis': sentiment_analysis
         }).encode()
     )
+<<<<<<< HEAD
     # Convert the string to a Python object (list of dictionaries in this case)
     print("this is analysis",sentiment_analysis)
 
@@ -110,3 +141,12 @@ def transcribe(filename):
 
 if __name__ == "__main__":
     app.run(debug=True, port=3004)
+=======
+ 
+    sentiment_analysis=json.loads(sentiment_analysis)
+    return render_template('transcribe.html', transcription=text, sentiment_analysis=sentiment_analysis)
+
+
+if __name__ == "__main__":
+    app.run(debug=True, port=3000)
+>>>>>>> sentimentBranch
