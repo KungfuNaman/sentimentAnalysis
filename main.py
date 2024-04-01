@@ -39,7 +39,7 @@ def upload_file():
             return redirect(url_for('transcribe', filename=filename))
     return render_template('index.html')
 
-@app.route('/transcribe/<filename>')
+# @app.route('/transcribe/<filename>')
 def transcribe(filename):
     original_filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     filepath = convert_to_wav(original_filepath)
