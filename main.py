@@ -43,7 +43,10 @@ def upload_file():
 def transcribe(filename):
     try:
         original_filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        print("starting to convert to wav",original_filepath)
         filepath = convert_to_wav(original_filepath)
+        print("convert to wav result",filepath)
+
         model = whisper.load_model("base")  
         result = model.transcribe(filepath)
         print("whisper response",result)
