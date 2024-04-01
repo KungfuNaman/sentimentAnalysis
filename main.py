@@ -6,7 +6,7 @@ import boto3
 import whisper
 import json
 # import ssl
-import certifi
+# import certifi
 
 # ssl_context = ssl.create_default_context(cafile=certifi.where())
 # ssl._create_default_https_context = ssl._create_unverified_context
@@ -41,38 +41,52 @@ def upload_file():
 
 @app.route('/transcribe/<filename>')
 def transcribe(filename):
-    original_filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    filepath = convert_to_wav(original_filepath)
-    model = whisper.load_model("base")  
-    result = model.transcribe(filepath)
-    text = result["text"]
-    sentiment_analysis = analyze_sentiment(text)
+    try:
+        original_filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        filepath = convert_to_wav(original_filepath)
+        model = whisper.load_model("base")  
+        result = model.transcribe(filepath)
+        print("whisper response",result)
 
-    aws_access_key_id = os.getenv('aws_access_key_id')
-    aws_secret_access_key = os.getenv('aws_secret_access_key')
-    aws_default_region = os.getenv('aws_default_region')
-    s3 = boto3.client(
-        's3',
-        aws_access_key_id=aws_access_key_id,
-        aws_secret_access_key=aws_secret_access_key,
-        region_name=aws_default_region
-    )
-    bucket_name = 'myaudiosentimentbucket'
-    object_key = f'sentimentanalysis/{filename}.json'
+        text = result["text"]
+        sentiment_analysis = analyze_sentiment(text)
 
-    sentiment_analysis = sentiment_analysis.strip('```json\n').rstrip('```')
+        print("analyze_sentiment response",sentiment_analysis)
 
-    s3_response = s3.put_object(
-        Bucket=bucket_name,
-        Key=object_key,
-        Body=str({
-            # 'transcription': text,
-            'sentiment_analysis': sentiment_analysis
-        }).encode()
-    )
- 
-    sentiment_analysis=json.loads(sentiment_analysis)
-    return render_template('transcribe.html', transcription=text, sentiment_analysis=sentiment_analysis)
+        aws_access_key_id = os.getenv('aws_access_key_id')
+        aws_secret_access_key = os.getenv('aws_secret_access_key')
+        aws_default_region = os.getenv('aws_default_region')
+        s3 = boto3.client(
+            's3',
+            aws_access_key_id=aws_access_key_id,
+            aws_secret_access_key=aws_secret_access_key,
+            region_name=aws_default_region
+        )
+        bucket_name = 'myaudiosentimentbucket'
+        object_key = f'sentimentanalysis/{filename}.json'
+
+
+
+        sentiment_analysis = sentiment_analysis.strip('```json\n').rstrip('```')
+
+        s3_response = s3.put_object(
+            Bucket=bucket_name,
+            Key=object_key,
+            Body=str({
+                # 'transcription': text,
+                'sentiment_analysis': sentiment_analysis
+            }).encode()
+        )
+        
+        print("s3_resposponse",s3_response)
+        sentiment_analysis=json.loads(sentiment_analysis)
+        return render_template('transcribe.html', transcription=text, sentiment_analysis=sentiment_analysis)
+    except Exception as e:
+        # Log and print the error
+        app.logger.error(f'Error processing {filename}: {str(e)}', exc_info=True)
+        print(f'Error processing {filename}: {str(e)}')
+        # Optionally, return an error page or message
+        return render_template('error.html'), 500
 
 if __name__ == "__main__":
     app.run()
