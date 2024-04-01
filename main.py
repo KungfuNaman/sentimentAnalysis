@@ -5,11 +5,11 @@ from pydub import AudioSegment
 import boto3
 import whisper
 import json
-import ssl
+# import ssl
 import certifi
 
-ssl_context = ssl.create_default_context(cafile=certifi.where())
-ssl._create_default_https_context = ssl._create_unverified_context
+# ssl_context = ssl.create_default_context(cafile=certifi.where())
+# ssl._create_default_https_context = ssl._create_unverified_context
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads/'
