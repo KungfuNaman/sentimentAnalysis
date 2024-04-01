@@ -55,12 +55,6 @@ Step 6: Access the Application
 This command starts the server on http://127.0.0.1:3000, where you can access the web application
 
 # Access the web application at "http://localhost:3000".
-
-# Your AWS credentials and default region
-    aws_access_key_id = 'AKIAZI2LEQURTKBD7FNT'
-    aws_secret_access_key = '0Y8Wc9gDY3WT28WMyhBi2QFlvfJOr5XqVYTsTjZd'
-    aws_default_region = 'eu-west-2'
-    OPENAI_API_KEY='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'
     
 # Challenges Faced
 Developing this Flask-based audio sentiment analysis application presented several significant challenges, including:
