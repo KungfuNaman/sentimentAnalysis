@@ -73,3 +73,6 @@ def transcribe(filename):
  
     sentiment_analysis=json.loads(sentiment_analysis)
     return render_template('transcribe.html', transcription=text, sentiment_analysis=sentiment_analysis)
+
+if __name__ == "__main__":
+    app.run()
